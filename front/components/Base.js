@@ -52,8 +52,9 @@ const GithubProfile = ({ route, navigation }) => {
             <Text>🏢 {user.company}</Text>
             <Text>📭 {user.location}</Text>
             <Text>🧑 {user.bio}</Text>
-            <Text><SocialIcon raised={false} iconSize={5}
-
+            <Text><SocialIcon
+                raised={false}
+                iconSize={5}
                 type='twitter'
             />{user.twitter_username}</Text>
             <Text>📚 {user.public_repos} public repos</Text>
