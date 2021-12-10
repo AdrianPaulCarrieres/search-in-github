@@ -27,14 +27,19 @@ const InputScreen = ({ navigation }) => {
     }
 
     return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-            <TextInput
-                style={styles.input}
-                onChangeText={setGithubUsername}
-                placeholder="Type your Github username here"
-            />
-            <TouchableOpacity onPress={() => getUser()} >
-                <Text style={styles.text}>Get my data!</Text>
+        <View style={styles.container}>
+            <View style={styles.content}>
+                <TextInput
+                    style={styles.input}
+                    onChangeText={setGithubUsername}
+                    placeholder="Type your Github username here"
+                />
+
+            </View>
+            <TouchableOpacity style={{ backgroundColor: "#D97378", borderRadius: 50 }} onPress={() => getUser()}>
+                <View style={{borderRadius: 50, margin: "5%" }}>
+                    <Text style={{color: 'black', fontWeight: 'bold', textAlign: "center" }}>Get my data!</Text>
+                </View>
             </TouchableOpacity>
         </View>
     );
@@ -122,9 +127,12 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
-        margin: 12,
+        marginHorizontal: 12,
+        marginBottom: 50,
         borderWidth: 1,
         padding: 10,
+        backgroundColor: "white",
+        borderRadius: 50
     },
     container: {
         flex: 1,
