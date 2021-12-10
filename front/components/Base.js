@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image, Linking } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
 import { Link, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { clickProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
 import { mockApiUser } from '../core/proxy';
-import { SocialIcon } from 'react-native-elements'
+import { SocialIcon } from 'react-native-elements';
+import * as Linking from 'expo-linking';
 
 
 const InputScreen = ({ navigation }) => {
@@ -45,15 +46,7 @@ const GithubProfile = ({ route, navigation }) => {
     const { user } = route.params
 
     function openBrowser() {
-        Linking.canOpenURL("https://github.com/AdrianPaulCarrieres").then(supported => {
-            if (supported) {
-                alert("We didn't find an user called " + gitHubUsername);
-
-                Linking.openURL("https://github.com/AdrianPaulCarrieres");
-            } else {
-                alert("We didn't find an user called " + gitHubUsername);
-            }
-        });
+        Linking.openURL("https://github.com/AdrianPaulCarrieres")
     }
 
     return (
@@ -106,7 +99,7 @@ const GithubProfile = ({ route, navigation }) => {
                 </View>
 
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => openBrowser()}>
                 <SocialIcon
                     title='Go to my profile'
                     button
