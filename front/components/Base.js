@@ -58,23 +58,23 @@ const GithubProfile = ({ route, navigation }) => {
                     style={styles.image}
                 />
                 <View style={{ flewDirection: "column", margin: "5%", justifyContent: "center" }}>
-                    <Text>{user.name}</Text>
-                    <Text style={{ fontSize: 10 }}>{user.login}</Text>
+                    <Text style={{ color: '#ffff', fontWeight: 'bold' }}>{user.name}</Text>
+                    <Text style={{ color: '#dcddde', fontSize: 10 }}>{user.login}</Text>
                 </View>
             </View>
 
             <View style={styles.content}>
                 <View style={styles.label}>
                     <Text>🏢</Text>
-                    <Text> {user.company}</Text>
+                    <Text style={{ color: '#dcddde' }}> {user.company}</Text>
                 </View>
                 <View style={styles.label}>
                     <Text>📭</Text>
-                    <Text> {user.location}</Text>
+                    <Text style={{ color: '#dcddde' }}> {user.location}</Text>
                 </View>
                 <View style={styles.label}>
                     <Text>🧑</Text>
-                    <Text> {user.bio}</Text>
+                    <Text style={{ color: '#dcddde' }}> {user.bio}</Text>
                 </View>
                 <View style={styles.label}>
                     <SocialIcon
@@ -83,29 +83,30 @@ const GithubProfile = ({ route, navigation }) => {
                         iconSize={10}
                         type='twitter'
                     />
-                    <Text> {user.twitter_username}</Text>
+                    <Text style={{ color: '#dcddde' }}> {user.twitter_username}</Text>
                 </View>
                 <View style={styles.label}>
                     <Text>📚</Text>
-                    <Text> {user.public_repos} public repos</Text>
+                    <Text style={{ color: '#dcddde' }}> {user.public_repos} public repos</Text>
                 </View>
                 <View style={styles.label}>
                     <Text>🧑‍🤝‍🧑</Text>
-                    <Text> {user.followers} followers · {user.following} following</Text>
+                    <Text style={{ color: '#dcddde' }}> {user.followers} followers · {user.following} following</Text>
                 </View>
                 <View style={styles.label}>
                     <Text>📆</Text>
-                    <Text> joined the {user.created_at.split("T")[0]}</Text>
+                    <Text style={{ color: '#dcddde' }}> joined the {user.created_at.split("T")[0]}</Text>
                 </View>
 
             </View>
-                <TouchableOpacity  onPress={() => openBrowser()}>
-                    <SocialIcon
-                        title='Go to my profile'
-                        button
-                        type='github'
-                    />
-                </TouchableOpacity>
+            <TouchableOpacity onPress={() => openBrowser()}>
+                <SocialIcon
+                    title='Go to my profile'
+                    button
+                    type='github'
+                    style={{ backgroundColor: "#7289da" }}
+                />
+            </TouchableOpacity>
         </View>
     );
 }
@@ -127,20 +128,21 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        padding: "5%"
+        padding: "5%",
+        backgroundColor: "#2f3136",
     },
     header: {
         flexDirection: "row",
         borderRadius: 50,
         padding: "5%",
-        backgroundColor: "#42536e",
+        backgroundColor: "#36393f",
         margin: "5%"
     },
     content: {
         flex: 1,
         justifyContent: "center",
         borderRadius: 50,
-        backgroundColor: "#dce1e8",
+        backgroundColor: "#36393f",
         margin: "5%"
     },
     label: {
@@ -148,6 +150,11 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         padding: "5%",
+    },
+    title: {
+
+        color: "white"
+
     }
 });
 
