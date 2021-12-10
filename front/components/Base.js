@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image, Linking } from 'react-native';
+import { Link, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { clickProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
 import { mockApiUser } from '../core/proxy';
@@ -44,6 +44,18 @@ const GithubProfile = ({ route, navigation }) => {
 
     const { user } = route.params
 
+    function openBrowser() {
+        Linking.canOpenURL("https://github.com/AdrianPaulCarrieres").then(supported => {
+            if (supported) {
+                alert("We didn't find an user called " + gitHubUsername);
+
+                Linking.openURL("https://github.com/AdrianPaulCarrieres");
+            } else {
+                alert("We didn't find an user called " + gitHubUsername);
+            }
+        });
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.header}>
@@ -60,26 +72,47 @@ const GithubProfile = ({ route, navigation }) => {
             </View>
 
             <View style={styles.content}>
-
-                <Text>🏢 {user.company}</Text>
-                <Text>📭 {user.location}</Text>
-                <Text>🧑 {user.bio}</Text>
-                <Text><SocialIcon
-                    raised={false}
-                    iconSize={5}
-                    type='twitter'
-                />{user.twitter_username}</Text>
-                <Text>📚 {user.public_repos} public repos</Text>
-
-                <Text>🧑‍🤝‍🧑 {user.followers} followers · {user.following} following</Text>
-                <Text>	📆 joined the {user.created_at.split("T")[0]}</Text>
+                <View style={styles.label}>
+                    <Text>🏢</Text>
+                    <Text> {user.company}</Text>
+                </View>
+                <View style={styles.label}>
+                    <Text>📭</Text>
+                    <Text> {user.location}</Text>
+                </View>
+                <View style={styles.label}>
+                    <Text>🧑</Text>
+                    <Text> {user.bio}</Text>
+                </View>
+                <View style={styles.label}>
+                    <SocialIcon
+                        raised={false}
+                        iconSize={7}
+                        type='twitter'
+                    />
+                    <Text> {user.twitter_username}</Text>
+                </View>
+                <View style={styles.label}>
+                    <Text>📚</Text>
+                    <Text> {user.public_repos} public repos</Text>
+                </View>
+                <View style={styles.label}>
+                    <Text>🧑‍🤝‍🧑</Text>
+                    <Text> {user.followers} followers · {user.following} following</Text>
+                </View>
+                <View style={styles.label}>
+                    <Text>📆</Text>
+                    <Text> joined the {user.created_at.split("T")[0]}</Text>
+                </View>
 
             </View>
-            <SocialIcon
-                title='Go to my profile'
-                button
-                type='github'
-            />
+            <TouchableOpacity>
+                <SocialIcon
+                    title='Go to my profile'
+                    button
+                    type='github'
+                />
+            </TouchableOpacity>
         </View>
     );
 }
@@ -107,6 +140,13 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignContent: "center",
         alignItems: "center"
+    },
+    label: {
+        alignItems: "center",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        padding: "5%",
     }
 });
 
