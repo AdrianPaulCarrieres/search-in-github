@@ -37,7 +37,7 @@ defmodule Api do
       :poolboy.transaction(
         :worker,
         fn pid ->
-          GenServer.call(pid, {:put, username, data})
+          GenServer.call(pid, {:put, username, data |> Jason.encode!()})
         end
       )
 

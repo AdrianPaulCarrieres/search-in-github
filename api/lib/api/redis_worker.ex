@@ -3,7 +3,7 @@ defmodule Api.RedisWorker do
 
   require Logger
 
-  @ttl 60
+  @ttl 5
   @redis_url "redis://localhost:6379/3"
 
   @moduledoc """
@@ -35,9 +35,9 @@ defmodule Api.RedisWorker do
         Logger.info("Key #{key} not found in cache")
         {:reply, result, conn}
 
-      {:ok, _} = result ->
+      {:ok, value} ->
         Logger.info("Found value in cache for key #{key}")
-        {:reply, result, conn}
+        {:reply, {:ok, Jason.decode!(value)}, conn}
     end
   end
 end

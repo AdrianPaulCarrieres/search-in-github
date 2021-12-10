@@ -3,8 +3,6 @@ defmodule Api.Github do
 
   @spec get(binary()) :: binary()
   def get(username) do
-    Req.build(:get, "https://api.github.com/users/#{username}")
-    |> Req.run!()
-    |> Map.get(:body)
+    Req.get!("https://api.github.com/users/#{username}") |> Map.get(:body)
   end
 end
