@@ -3,7 +3,7 @@ defmodule Api.RedisWorker do
 
   require Logger
 
-  @ttl 5
+  @ttl 60
   @redis_url "redis://localhost:6379/3"
 
   @moduledoc """
