@@ -2,7 +2,6 @@ import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { mockApiUser } from '../core/proxy';
 import { SocialIcon } from 'react-native-elements';
 import * as Linking from 'expo-linking';
 
@@ -15,13 +14,18 @@ const InputScreen = ({ navigation }) => {
         if (gitHubUsername === "") {
             alert("Please type your username");
         } else {
-
+            console.log(gitHubUsername)
             fetch("https://api.github.com" + "/users/" + gitHubUsername)
                 .then(response => response.json())
-                .then(user => {
-                    navigation.navigate("My Github profile", {
-                        user: user
-                    })
+                .then(data => {
+                    console.log(data);
+                    if (data.login) {
+                        navigation.navigate("My Github profile", {
+                            user: data
+                        })
+                    } else {
+                        throw new Error("User not found");
+                    }
                 }).catch(error => {
                     alert("We didn't find an user called " + gitHubUsername);
                 });
