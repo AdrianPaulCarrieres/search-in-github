@@ -15,7 +15,8 @@ const InputScreen = ({ navigation }) => {
             alert("Please type your username");
         } else {
             console.log(gitHubUsername)
-            fetch("https://api.github.com" + "/users/" + gitHubUsername)
+            //exp://:19000
+            fetch("http://localhost:4000/api" + "/users/" + gitHubUsername)
                 .then(response => response.json())
                 .then(data => {
                     console.log(data);

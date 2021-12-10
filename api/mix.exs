@@ -44,7 +44,8 @@ defmodule Api.MixProject do
       {:req, "~> 0.2.0"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:redix, "~> 1.1"},
-      {:poolboy, "~> 1.5.1"}
+      {:poolboy, "~> 1.5.1"},
+      {:corsica, "~> 1.0"}
     ]
   end
 
