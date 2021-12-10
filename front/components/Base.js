@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -40,7 +40,7 @@ const InputScreen = ({ navigation }) => {
     );
 }
 
-const GithubProfile = ({ route, navigation }) => {
+const GithubProfile = ({ route, _navigation }) => {
 
     const { user } = route.params
 
@@ -104,7 +104,7 @@ const GithubProfile = ({ route, navigation }) => {
                     title='Go to my profile'
                     button
                     type='github'
-                    style={{ backgroundColor: "#7289da" }}
+                    style={{ backgroundColor: "#D97378" }}
                 />
             </TouchableOpacity>
         </View>
@@ -150,18 +150,25 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         padding: "5%",
-    },
-    title: {
-
-        color: "white"
-
     }
 });
+
+const MyTheme = {
+    dark: false,
+    colors: {
+        primary: 'rgb(255, 255, 255)',
+        background: 'rgb(255, 255, 255)',
+        card: 'rgb(32, 34, 37)',
+        text: 'rgb(255, 255, 255)',
+        border: 'rgb(255, 255, 255)',
+        notification: 'rgb(255, 255, 255)',
+    }
+};
 
 const Stack = createNativeStackNavigator();
 const Base = () => {
     return (
-        <NavigationContainer>
+        <NavigationContainer theme={MyTheme}>
             <Stack.Navigator>
                 <Stack.Screen name="Welcome!" component={InputScreen} />
                 <Stack.Screen name="My Github profile" component={GithubProfile} />
