@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, TextInput, Image } from 'react-native';
-import { Link, NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { clickProps } from 'react-native-web/dist/cjs/modules/forwardedProps';
 import { mockApiUser } from '../core/proxy';
 import { SocialIcon } from 'react-native-elements';
 import * as Linking from 'expo-linking';
@@ -56,7 +55,7 @@ const GithubProfile = ({ route, navigation }) => {
                     source={{
                         uri: user.avatar_url,
                     }}
-                    style={{ width: 100, height: 100 }}
+                    style={styles.image}
                 />
                 <View style={{ flewDirection: "column", margin: "5%", justifyContent: "center" }}>
                     <Text>{user.name}</Text>
@@ -80,7 +79,8 @@ const GithubProfile = ({ route, navigation }) => {
                 <View style={styles.label}>
                     <SocialIcon
                         raised={false}
-                        iconSize={7}
+                        light
+                        iconSize={10}
                         type='twitter'
                     />
                     <Text> {user.twitter_username}</Text>
@@ -99,18 +99,23 @@ const GithubProfile = ({ route, navigation }) => {
                 </View>
 
             </View>
-            <TouchableOpacity onPress={() => openBrowser()}>
-                <SocialIcon
-                    title='Go to my profile'
-                    button
-                    type='github'
-                />
-            </TouchableOpacity>
+                <TouchableOpacity  onPress={() => openBrowser()}>
+                    <SocialIcon
+                        title='Go to my profile'
+                        button
+                        type='github'
+                    />
+                </TouchableOpacity>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    image: {
+        borderRadius: 100,
+        width: 100,
+        height: 100
+    },
     text: {
         color: "blue"
     },
@@ -126,19 +131,22 @@ const styles = StyleSheet.create({
     },
     header: {
         flexDirection: "row",
+        borderRadius: 50,
+        padding: "5%",
+        backgroundColor: "#42536e",
+        margin: "5%"
     },
     content: {
         flex: 1,
-        padding: "5%",
         justifyContent: "center",
-        alignContent: "center",
-        alignItems: "center"
+        borderRadius: 50,
+        backgroundColor: "#dce1e8",
+        margin: "5%"
     },
     label: {
         alignItems: "center",
         display: "flex",
         flexDirection: "row",
-        justifyContent: "center",
         padding: "5%",
     }
 });
