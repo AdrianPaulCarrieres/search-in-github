@@ -15,14 +15,16 @@ const InputScreen = ({ navigation }) => {
         if (gitHubUsername === "") {
             alert("Please type your username");
         } else {
-            let user = await mockApiUser();
-            if (user) {
-                navigation.navigate("My Github profile", {
-                    user: user
-                })
-            } else {
-                alert("We didn't find an user called " + gitHubUsername);
-            }
+
+            fetch("https://api.github.com" + "/users/" + gitHubUsername)
+                .then(response => response.json())
+                .then(user => {
+                    navigation.navigate("My Github profile", {
+                        user: user
+                    })
+                }).catch(error => {
+                    alert("We didn't find an user called " + gitHubUsername);
+                });
         }
     }
 
@@ -37,8 +39,8 @@ const InputScreen = ({ navigation }) => {
 
             </View>
             <TouchableOpacity style={{ backgroundColor: "#D97378", borderRadius: 50 }} onPress={() => getUser()}>
-                <View style={{borderRadius: 50, margin: "5%" }}>
-                    <Text style={{color: 'black', fontWeight: 'bold', textAlign: "center" }}>Get my data!</Text>
+                <View style={{ borderRadius: 50, margin: "5%" }}>
+                    <Text style={{ color: 'black', fontWeight: 'bold', textAlign: "center" }}>Get my data!</Text>
                 </View>
             </TouchableOpacity>
         </View>
